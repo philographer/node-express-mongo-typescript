@@ -15,8 +15,8 @@ export default class UserController {
 
     }
 
-    static createUser() {
-        return UserService.createUser();
+    static createUser(username, password) {
+        return UserService.createUser(username, password);
     }
 
     static readUser(id) {

@@ -5,19 +5,28 @@
  **/
 
 /** External dependencies **/
+let bcrypt = require('bcrypt');
 
 /** Internal dependencies **/
-import {UserModel, IUser} from './dbModel';
+import {UserModel} from './dbModel';
+import CONFIG from './../config';
 
 export default class UserService {
     constructor() {
 
     }
 
-    static createUser() {
-        let user = new UserModel({username: 'Jane2'});
-        user.username;
-        return user.save();
+    static createUser(username, password) {
+        return new Promise((resolve, reject) => {
+            this._encryptPassword(password).then((hashedPassword) => {
+                let user = new UserModel({username: username, password: hashedPassword});
+                user.save().then(() => {
+                    resolve();
+                }).catch((err) => {
+                    reject(err);
+                });
+            });
+        });
     }
 
     static readUser(id) {
@@ -30,5 +39,21 @@ export default class UserService {
 
     static deleteUser(id) {
         return UserModel.remove({_id: id});
+    }
+
+    static _encryptPassword(plaintextPassword) {
+        return new Promise((resolve, reject) => {
+            bcrypt.hash(plaintextPassword, CONFIG.BCRYPT_SALT_ROUNDS).then((hash) => {
+                resolve(hash);
+            });
+        });
+    }
+
+    static _verifyPassword(plainPassword, hash) {
+        return new Promise((resolve, reject) => {
+            bcrypt.compare(plainPassword, hash).then((res) => {
+                resolve(res);
+            });
+        });
     }
 }

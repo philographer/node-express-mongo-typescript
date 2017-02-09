@@ -6,8 +6,8 @@
 "use strict";
 /** External dependencies **/
 /** Internal dependencies **/
-function userRouter(req, res) {
+function MainRouter(req, res) {
     res.status(200).json({ res: 'success' });
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = userRouter;
+exports.default = MainRouter;

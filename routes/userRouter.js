@@ -9,10 +9,12 @@
 const userControlelr_1 = require("./../controller/userControlelr");
 const UserRouter = {
     create(req, res) {
-        userControlelr_1.default.createUser().then(() => {
+        let username = req.body.username;
+        let password = req.body.password;
+        userControlelr_1.default.createUser(username, password).then(() => {
             res.status(200).json({ res: 'success' });
         }).catch((err) => {
-            res.status(500).json({ errmsg: err.errmsg });
+            res.status(500).json({ errmsg: err });
         });
     },
     read(req, res) {

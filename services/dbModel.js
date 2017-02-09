@@ -13,6 +13,10 @@ let UserSchema = new mongoose_1.Schema({
         required: true,
         unique: true
     },
+    password: {
+        type: String,
+        required: true,
+    },
     age: Number,
     friends: [String],
     data: [mongoose_1.Schema.Types.Mixed]

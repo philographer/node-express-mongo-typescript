@@ -10,8 +10,8 @@ const userService_1 = require("./../services/userService");
 class UserController {
     constructor() {
     }
-    static createUser() {
-        return userService_1.default.createUser();
+    static createUser(username, password) {
+        return userService_1.default.createUser(username, password);
     }
     static readUser(id) {
         return userService_1.default.readUser(id);

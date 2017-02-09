@@ -8,6 +8,6 @@
 
 /** Internal dependencies **/
 
-export default function userRouter(req, res) {
+export default function MainRouter(req, res) {
     res.status(200).json({res: 'success'});
 }
