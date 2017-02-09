@@ -25,7 +25,7 @@ router.put('/user/:id', UserRouter.update);
 router.delete('/user/:id', UserRouter.delete); // Todo: Only dev test
 
 // Auth Router
-router.get('/auth/login', AuthRouter.login); // send facebook auth link
+router.get('/auth/login', AuthMiddleware.userAuthenticated, AuthRouter.login); // send facebook auth link
 router.get('/auth/success', AuthMiddleware.userAuthenticated, AuthRouter.success); // success redirect for facebook auth
 router.get('/auth/fail', AuthRouter.fail);
 router.post('/auth/login', // local auth router

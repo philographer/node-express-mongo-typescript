@@ -4,10 +4,6 @@
 "use strict";
 const AuthRouter = {
     login(req, res) {
-        if (req.user) {
-            res.status(307).redirect('/auth/success');
-            return;
-        }
         res.sendFile(__dirname + '/login.html');
     },
     success(req, res) {
