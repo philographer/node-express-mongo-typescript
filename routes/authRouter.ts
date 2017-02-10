@@ -2,11 +2,13 @@
  * Created by yuhogyun on 2017. 2. 3..
  */
 
-import * as passport from 'passport';
+const path = require('path');
+
 
 const AuthRouter = {
     login(req, res) {
-        res.sendFile(__dirname + '/login.html');
+        if(req.user) return res.redirect('/auth/success');
+        res.sendFile('login.html', {root: __dirname +'/../public/html'});
     },
     success(req, res) {
         let user = req.user;

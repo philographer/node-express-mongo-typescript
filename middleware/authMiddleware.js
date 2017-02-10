@@ -8,7 +8,7 @@ const AuthMiddleware = {
             next();
         }
         else {
-            res.redirect('/login');
+            res.redirect('/auth/login');
         }
     }
 };

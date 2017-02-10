@@ -13,6 +13,7 @@ import UserRouter from './userRouter';
 import MainRouter from './mainRouter';
 import AuthRouter from './authRouter';
 import AuthMiddleware from './../middleware/authMiddleware';
+import FileRouter from './fileRouter';
 
 let router = express.Router();
 
@@ -25,7 +26,7 @@ router.put('/user/:id', UserRouter.update);
 router.delete('/user/:id', UserRouter.delete); // Todo: Only dev test
 
 // Auth Router
-router.get('/auth/login', AuthMiddleware.userAuthenticated, AuthRouter.login); // send facebook auth link
+router.get('/auth/login', AuthRouter.login); // send facebook auth link
 router.get('/auth/success', AuthMiddleware.userAuthenticated, AuthRouter.success); // success redirect for facebook auth
 router.get('/auth/fail', AuthRouter.fail);
 router.post('/auth/login', // local auth router
@@ -41,6 +42,10 @@ router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
         successRedirect: '/auth/success',
         failureRedirect: '/auth/fail' }));
+
+// File Upload Logic
+router.get('/file', FileRouter.uploadPage);
+router.post('/file', FileRouter.upload);
 
 
 export default router;
